@@ -11,9 +11,6 @@ namespace Playground
       var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
       IConfiguration config = builder.Build();
 
-      var section = config.GetSection("Root");
-
-
       var result =  config.GetSection("Root").Get<Composite<ServiceA>>();
 
 
@@ -24,16 +21,16 @@ namespace Playground
   }
 
 
-  interface IComposite<TServiceInterface>
+  interface IComposite<T>
   {
     public string Commons { get; set; }
-    public TServiceInterface Custom { get; set; }
+    public T Custom { get; set; }
   }
 
-  class Composite<TServiceInterface> : IComposite<TServiceInterface>
+  class Composite<T> : IComposite<T>
   {
     public string Commons { get; set; }
-    public TServiceInterface Custom { get; set; }
+    public T Custom { get; set; }
   }
 
   interface IServiceA
